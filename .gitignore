@@ -1,15 +1,42 @@
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.so
+
+# Virtual environments
 .venv/
 venv/
+env/
 
+# Environment variables
+.env
+
+# Jupyter
 .ipynb_checkpoints/
 
+# IDE
+.vscode/
+.idea/
+
+# OS files
 .DS_Store
+Thumbs.db
 
-*.pkl
-*.joblib
+# Logs
+*.log
 
-data/raw_data
-
+# Database
 *.db
+
+# Test/cache
+.pytest_cache/
+.mypy_cache/
+.cache/
+
+# Raw datasets
+data/raw_data/
+
+# Build
+build/
+dist/
+*.egg-info/
