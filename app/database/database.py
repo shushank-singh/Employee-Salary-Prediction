@@ -5,6 +5,7 @@ DATABASE_URL = "postgresql://postgres:SHUshu8400@localhost:5432/employee_salary_
 
 engine = create_engine(DATABASE_URL)
 
+Base = declarative_base()
 
 SessionLocal = sessionmaker(
     autocommit=False,
