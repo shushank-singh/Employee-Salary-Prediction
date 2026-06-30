@@ -60,3 +60,18 @@ def salary_predict(
             status_code=500,
             detail=str(e)
         )
+
+@router.get("/history")
+def prediction_history(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+
+    history = (
+        db.query(Prediction)
+        .filter(Prediction.user_id == current_user.id)
+        .order_by(Prediction.created_at.desc())
+        .all()
+    )
+
+    return history

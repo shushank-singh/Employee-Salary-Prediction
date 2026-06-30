@@ -74,7 +74,7 @@ class Employee(BaseModel):
     company_size : CompanySize
     location : Location
     remote_work : RemoteWork
-    certifications : Annotated[int,Field(le=5,ge=0,description="How Many Certificate You Have")]
+    certifications : Annotated[int,Field(le=10,ge=0,description="How Many Certificate You Have")]
 
 
     @model_validator(mode="after")
