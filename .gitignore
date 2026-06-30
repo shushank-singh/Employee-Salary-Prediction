@@ -40,3 +40,5 @@ data/raw_data/
 build/
 dist/
 *.egg-info/
+
+models/*.pkl
