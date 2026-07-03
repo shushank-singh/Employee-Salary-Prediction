@@ -127,7 +127,7 @@ with left:
             "Industry",
             "Finance",
             "Education",
-            "Healthcare",
+            "Technology",
             "Retail",
             "Manufacturing",
             "Consulting",
