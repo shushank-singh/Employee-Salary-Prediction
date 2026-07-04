@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends,HTTPException
 from sqlalchemy.orm import Session
 
 from app.database.database import get_db
@@ -57,14 +57,16 @@ def login(user: UserLogin,
     )
 
     if not db_user:
-        return {
-            "message": "Invalid Email or Password"
-        }
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid Email or Password"
+        )
     
     if not verify_password(user.password , db_user.password):
-        return {
-            "message": "Invalid Email or Password"
-        }
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid Email or Password"
+        )
     
     access_token = create_access_token(
         {

@@ -36,7 +36,8 @@ def login(email, password):
 
         data = response.json()
 
-        st.session_state.token = data["access_token"]
+        if "access_token" in data:
+            st.session_state.token = data["access_token"]
 
     return response
 

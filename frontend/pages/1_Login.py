@@ -109,11 +109,15 @@ with st.container():
         else:
 
             try:
-                message = response.json()
-            except Exception:
-                message = response.text
+                error = response.json()
 
-            st.error(message)
+                st.error(
+                    error.get("detail", error.get("message", "Login Failed"))
+                )
+
+            except Exception:
+
+                st.error(response.text)
 
 st.markdown("---")
 
