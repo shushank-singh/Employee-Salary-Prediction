@@ -1,46 +1,87 @@
+# ==========================
 # Python
+# ==========================
 __pycache__/
 *.py[cod]
+*.pyo
 *.so
 
-# Virtual environments
-.venv/
+# ==========================
+# Virtual Environment
+# ==========================
 venv/
+.venv/
 env/
 
-# Environment variables
+# ==========================
+# Environment Variables
+# ==========================
 .env
+.env.*
 
+# ==========================
+# Streamlit
+# ==========================
+.streamlit/config.toml
+
+# ==========================
 # Jupyter
+# ==========================
 .ipynb_checkpoints/
 
+# ==========================
 # IDE
+# ==========================
 .vscode/
 .idea/
 
-# OS files
+# ==========================
+# Operating System
+# ==========================
 .DS_Store
 Thumbs.db
 
+# ==========================
 # Logs
+# ==========================
 *.log
 
-# Database
-*.db
-
-# Test/cache
+# ==========================
+# Cache
+# ==========================
 .pytest_cache/
 .mypy_cache/
 .cache/
 
-# Raw datasets
-data/raw_data/
-
-# Build
+# ==========================
+# Python Build
+# ==========================
 build/
 dist/
 *.egg-info/
 
-models/*.pkl
+# ==========================
+# SQLite
+# ==========================
+*.db
 
-*.streamlit
+# ==========================
+# Machine Learning Models
+# ==========================
+models/*.pkl
+models/*.joblib
+models/*.pickle
+
+# ==========================
+# Dataset
+# ==========================
+data/raw_data/
+
+# Optional
+*.csv
+
+# ==========================
+# Coverage
+# ==========================
+.coverage
+htmlcov/
