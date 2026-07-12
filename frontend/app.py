@@ -17,9 +17,9 @@ sys.path.append(
 from auth.login import login_page
 from auth.signup import signup_page
 
-from pages.dashboard import dashboard_page
-from pages.history import history_page
-from pages.profile import profile_page  
+from views.dashboard import dashboard_page
+from views.history import history_page
+from views.profile import profile_page  
 
 # ---------------- PAGE CONFIG ---------------- #
 
