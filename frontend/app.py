@@ -1,61 +1,138 @@
 import streamlit as st
 
+import os
+import sys
+from pathlib import Path
+
+css_path = Path(__file__).parent / "assets" / "style.css"
+
+sys.path.append(
+    os.path.dirname(
+        os.path.dirname(
+            os.path.abspath(__file__)
+        )
+    )
+)
+
+from auth.login import login_page
+from auth.signup import signup_page
+
+from pages.dashboard import dashboard_page
+from pages.history import history_page
+from pages.profile import profile_page  
+
+# ---------------- PAGE CONFIG ---------------- #
+
 st.set_page_config(
-    page_title="Employee Salary Prediction",
+    page_title="Employee Salary Predictor",
     page_icon="💰",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
+# ---------------- SESSION ---------------- #
+
 if "token" not in st.session_state:
     st.session_state.token = None
 
+# ---------------- CSS ---------------- #
+
+with open(css_path, "r", encoding="utf-8") as css:
+    st.markdown(
+        f"<style>{css.read()}</style>",
+        unsafe_allow_html=True,
+    )
+
+# ---------------- HIDE STREAMLIT ---------------- #
 
 st.markdown("""
 <style>
 
-[data-testid="stAppViewContainer"]{
-background:linear-gradient(135deg,#0F172A,#1E293B);
+#MainMenu{
+visibility:hidden;
 }
 
-[data-testid="stSidebar"]{
-background:#111827;
+footer{
+visibility:hidden;
 }
 
-h1,h2,h3{
-color:white;
-}
-
-p{
-color:white;
-}
 
 </style>
 """, unsafe_allow_html=True)
 
+# ====================================================
+# LOGIN SCREEN
+# ====================================================
 
-st.title("💰 Employee Salary Prediction")
+if st.session_state.token is None:
 
-st.markdown("---")
+    left, center, right = st.columns([1,2,1])
 
-st.markdown(
-"""
-## 👋 Welcome
+    with center:
 
-This application predicts employee salaries using Machine Learning.
+        tab1, tab2 = st.tabs(
+            [
+                "🔐 Login",
+                "📝 Signup"
+            ]
+        )
 
-### Features
+        with tab1:
+            login_page()
 
-- 🔐 JWT Authentication
-- 📈 Salary Prediction
-- 💾 Save Prediction History
-- 👤 User Profile
-- 📊 Dashboard
+        with tab2:
+            signup_page()
 
----
+    st.stop()
 
-### 👈 Use the Sidebar to Navigate.
-"""
-)
+# ====================================================
+# SIDEBAR
+# ====================================================
 
-st.success("Backend Connected Successfully ✅")
+with st.sidebar:
+
+    st.markdown("# 💰 Salary AI")
+
+    st.write("")
+
+    menu = st.radio(
+
+        "",
+
+        [
+            "🏠 Dashboard",
+            "📜 History",
+            "👤 Profile"
+        ]
+
+    )
+
+    st.write("---")
+
+    if st.button(
+        "🚪 Logout",
+        use_container_width=True
+    ):
+
+        st.session_state.token = None
+
+        if "salary" in st.session_state:
+            del st.session_state.salary
+
+        st.rerun()
+
+# ====================================================
+# PAGE ROUTING
+# ====================================================
+
+if menu == "🏠 Dashboard":
+
+    dashboard_page()
+
+elif menu == "📜 History":
+
+    history_page()
+
+elif menu == "👤 Profile":
+
+    profile_page()
